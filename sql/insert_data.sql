@@ -1,6 +1,4 @@
-INSERT INTO questions(id, is_common, content_en, content_cz, specification)
-VALUES
--- common questions
+INSERT INTO questions(id, is_common, content_en, content_cz, specification) VALUES
 	(1, true, 'Has your company experience in working with academic subjects (universities, colleges)?', 'Má-li Vaše firma zkušenost se spoluprací s akademickými subjekty (univerzity, vysoké školy)?', NULL),
 	(2, true, 'When was the last such cooperation?', 'Kdy taková spolupráce naposledy probíhala?', NULL),
 	(3, true, 'How did this cooperation went (is going) and how do you feel about it?', ' Jak tato spolupráce dopadla/probíhá a jaký z ní máte pocit?', NULL),
@@ -15,13 +13,12 @@ VALUES
 	(12, true, 'Do you reckone with the costs (eg money, technical equipment, technology) for cooperation?', 'Počítáte s náklady (např. peníze, technické zařízení, technologie) na spolupráci?', NULL),
 	(13, true, 'How many people do you think will be involved in the cooperation?', 'Kolik lidí podle Vás bude ze strany firmy do spolupráce zahrnuto?', NULL),
 	(14, true, 'Will be part of their working capacity granted for collaboration?', 'Budou mít tito zaměstnanci vyhrazenu část své pracovní kapacity pro spolupráci?', NULL),
-	(15, true, 'Do employees have the necessary expertise for the cooperation?', 'Mají zaměstnanci potřebné odborné znalosti pro spolupráci?', NULL),
+	(15, true, 'Do employees have the necessary expertise for the cooperation?', 'Mají zaměstnanci potřebné odborné znalosti pro spolupráci?', NULL),
 	(16, true, 'Who do you want to include in cooperation from university?', 'Koho chcete zahrnout do spolupráce ze strany univerzity?', NULL),
 	(17, true, 'Where will the cooperation take place?', 'Kde bude spolupráce probíhat?', NULL),
 	(18, true, 'How will cooperation work in terms of communication?', 'Jak bude spolupráce probíhat z hlediska komunikace?', NULL),
 	(19, true, 'How long do you think the cooperation will last?', 'Jak dlouho si myslíte, že bude spolupráce probíhat?', NULL),
 	(20, true, 'Do you have a clear idea of what cooperation might look like?', 'Máte jasnou představu o tom, jak by spolupráce mohla vypadat?', NULL),
--- specific questions
 	(21, false, 'Do you plan to support the university financially?', 'Plánujete-li finančně podporovat univerzitu?', 'management'),
 	(22, false, 'Do you have a technical facility in your company that you would like to provide to a university?', 'Máte-li ve firmě technické zařízení, které byste chtěli poskytnout univerzitě?', 'management'),
 	(23, false, 'Do you have internships for students in your company?', 'Máte-li ve firmě nabídky stáží pro studenty?', 'student mobility'),
@@ -43,9 +40,7 @@ VALUES
 	(39, false, 'Does your company require a non-disclosure agreement?', 'Vyžaduje vaše firma podpis smlouvy o mlčenlivosti?', 'education;research projects;commercial projects');
 
 
-INSERT INTO answers(question_id, letter, content_en, content_cz)
-VALUES
--- common questions
+INSERT INTO answers(question_id, letter, content_en, content_cz) VALUES
 	(1, 'a', 'Yes', 'Ano'),
 	(1, 'b', 'No, but we were part of a team that worked with the academic subject', 'Ne, ale byli jsme součástí týmu, který s akademickým subjektem spolupracoval'),
 	(1, 'c', 'No', 'Ne'),
@@ -64,8 +59,8 @@ VALUES
 	(5, 'b', 'It was individual concerns of some employees', 'Šlo spíše o individuální záležitost jednotlivých zaměstnanců'),
 	(6, 'a', 'Yes', 'Ano'),
 	(6, 'b', 'No', 'Ne'),
-	(7, 'a', 'Access to technology', 'Přístup k technologiím'),
-	(7, 'b', 'Knowledge of scientists', 'Znalosti vědců'),
+	(7, 'a', 'Access to technology', 'Přístup k technologiím'),
+	(7, 'b', 'Knowledge of scientists', 'Znalosti vědců'),
 	(7, 'c', 'Job offers', 'Pracovní nabídky'),
 	(7, 'd', 'Participation in projects', 'Účast na projektech'),
 	(7, 'e', 'Training for employees', 'Školení pro zaměstnance'),
@@ -96,10 +91,10 @@ VALUES
 	(15, 'a', 'Yes', 'Ano'),
 	(15, 'b', 'No', 'Ne'),
 	(15, 'c', 'No, but we want to invest in their education', 'Ne, ale chceme investovat do jejich vzdělání'),
-	(16, 'a', 'Employees, rather teachers', 'Zaměstnance, spíše vyučující'),
-	(16, 'b', 'Employees, rather researchers', 'Zaměstnance, spíše výzkumníky'),
+	(16, 'a', 'Employees, rather teachers', 'Zaměstnance, spíše vyučující'),
+	(16, 'b', 'Employees, rather researchers', 'Zaměstnance, spíše výzkumníky'),
 	(16, 'c', 'Students', 'Studenty'),
-	(16, 'd', 'Both groups', 'Obě skupiny'),
+	(16, 'd', 'Both groups', 'Obě skupiny'),
 	(17, 'a', 'University premises', 'Prostory univerzity'),
 	(17, 'b', 'Company premises', 'Prostory firmy'),
 	(17, 'c', 'University and company premises', 'Prostory univerzity a firmy'),
@@ -114,7 +109,6 @@ VALUES
 	(19, 'e', 'Longer', 'Více'),
 	(20, 'a', 'Yes', 'Ano'),
 	(20, 'b', 'Need to be specified', 'Je potřeba doupřesnit'),
--- specific questions
 	(21, 'a', 'Yes', 'Ano'),
 	(21, 'b', 'No', 'Ne'),
 	(22, 'a', 'Yes', 'Ano'),

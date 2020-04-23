@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import questions from './routes/questions';
-import answers from './routes/answers';
-import results from './routes/results';
-import statistics from './routes/statistics';
-import test from './routes/test';
+import questions from './controllers/questions';
+import answers from './controllers/answers';
+import results from './controllers/results';
+import statistics from './controllers/statistics';
+import test from './controllers/test';
 
 // Mount all routes
 export default () => {

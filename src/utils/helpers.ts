@@ -8,3 +8,7 @@ export function makeid(length): string {
 	}
 	return result;
 }
+
+export function now(): string {
+	return new Date().toLocaleString();
+}

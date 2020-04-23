@@ -22,7 +22,7 @@ export default (app: Router) => {
 	TestRoute.post('/', (req, res, next) => {
 		questionRepository.getQuestions(
 			(error) => {
-				console.log(Helpers.now() + ' LOG: Get next test state ERROR');
+				console.log(Helpers.now() + ' LOG: Get question ERROR');
 				return next(error);
 			},
 			(questions: Question[]) => {

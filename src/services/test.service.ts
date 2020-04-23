@@ -1,5 +1,11 @@
-import { TestState } from '../models/test-state';
-import { Question, Answer } from '../models';
+import {
+	TestState,
+	ProfileStats,
+	Result,
+	Question,
+	Answer,
+	CollaborationType,
+} from '../models';
 
 export class TestService {
 	nextState(state: TestState, questions: Question[]): TestState | null {
@@ -48,7 +54,8 @@ export class TestService {
 					!state.answers.find((a: Answer) => a.question_id === q.id)
 			);
 			if (!new_questions || new_questions.length <= 0) {
-				return this.calculateResult(state);
+				state.end_time = new Date();
+				return state;
 			} else {
 				let loopCounter = 0;
 				state.question = new_questions[0];
@@ -62,7 +69,8 @@ export class TestService {
 						(q) => q.id === state.question.id
 					);
 					if (!new_questions || new_questions.length <= 0) {
-						return this.calculateResult(state);
+						state.end_time = new Date();
+						return state;
 					}
 					state.question = new_questions[0];
 					loopCounter++;
@@ -73,10 +81,50 @@ export class TestService {
 		return null;
 	}
 
-	private calculateResult(state: TestState): TestState {
-		console.log('CALCULATE RESULTS');
-		state.end_time = new Date();
-		return state;
+	calculateResult(state: TestState): Result | null {
+		const primary_profile = new ProfileStats();
+		const secondary_profile = new ProfileStats();
+		if (!state.type_primary || !state.type_secondary) {
+			return null;
+		}
+		primary_profile.corresponding_type = CollaborationType[state.type_primary];
+		secondary_profile.corresponding_type =
+			CollaborationType[state.type_secondary];
+		for (let i = 0; i < state.answers.length; i++) {
+			const params = state.answers[i].params
+				? JSON.parse(state.answers[i].params)
+				: {};
+			for (let type in params) {
+				if (primary_profile.corresponding_type === CollaborationType[type]) {
+					for (let key in params[type]) {
+						primary_profile[key] = primary_profile[key] + params[type][key];
+					}
+				}
+				if (secondary_profile.corresponding_type === CollaborationType[type]) {
+					for (let key in params[type]) {
+						secondary_profile[key] = secondary_profile[key] + params[type][key];
+					}
+				}
+			}
+		}
+		for (let key in primary_profile) {
+			if (key !== 'corresponding_type') {
+				primary_profile[key] = Math.round(primary_profile[key] * 2) / 10;
+			}
+		}
+		for (let key in secondary_profile) {
+			if (key !== 'corresponding_type') {
+				secondary_profile[key] = Math.round(secondary_profile[key] * 2) / 10;
+			}
+		}
+		const result: Result = {
+			start_date: state.start_time ? state.start_time : new Date(),
+			complete_date: state.end_time ? state.end_time : new Date(),
+			primary_profile,
+			secondary_profile,
+			answers: state.answers,
+		};
+		return result;
 	}
 
 	private calculateSpecifications(

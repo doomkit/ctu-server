@@ -9,4 +9,5 @@ export interface TestState {
 	specific_questions?: any[];
 	start_time?: number | Date;
 	end_time?: number | Date;
+	result_str_id: string;
 }

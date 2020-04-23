@@ -11,16 +11,17 @@ export default (app: Router) => {
 			`SELECT start_date, complete_date FROM results`,
 			[],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(new Date().toLocaleString() + ' LOG: Get duration ERROR');
+					console.log(now + ' LOG: Get duration ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Get duration OK');
 				let avg_duration = statisticsService.calculateAvgDuration(db_res.rows);
 				let last_completion =
 					db_res.rows
 						.map((a: any) => a.complete_date)
 						.sort((a: any, b: any) => b.getTime() - a.getTime())[0] || null;
+				console.log(now + ' LOG: Get duration OK');
 				res.send({
 					avg_duration,
 					total: db_res.rows.length,
@@ -37,11 +38,12 @@ export default (app: Router) => {
 				FROM profiles`,
 			[],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(new Date().toLocaleString() + ' LOG: Get profiles ERROR');
+					console.log(now + ' LOG: Get profiles ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Get profiles OK');
+				console.log(now + ' LOG: Get profiles OK');
 				let avg_profile = statisticsService.calculateAvgProfile(db_res.rows);
 				res.send(avg_profile);
 			}
@@ -57,8 +59,9 @@ export default (app: Router) => {
 			`,
 			[],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(new Date().toLocaleString() + ' LOG: Get profiles ERROR');
+					console.log(now + ' LOG: Get profiles ERROR');
 					return next(err);
 				}
 				let result = {};
@@ -67,7 +70,7 @@ export default (app: Router) => {
 						result[elem.corresponding_type] = Number.parseInt(elem.count);
 					});
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Get profiles OK');
+				console.log(now + ' LOG: Get profiles OK');
 				res.send(result);
 			}
 		);

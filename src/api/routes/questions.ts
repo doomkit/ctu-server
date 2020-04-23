@@ -15,13 +15,12 @@ export default (app: Router) => {
 			`,
 			[],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(
-						new Date().toLocaleString() + ' LOG: Delete questions ERROR'
-					);
+					console.log(now + ' LOG: Delete questions ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Get questions OK');
+				console.log(now + ' LOG: Get questions OK');
 				res.send(db_res.rows);
 			}
 		);
@@ -39,11 +38,12 @@ export default (app: Router) => {
 			`,
 			[req.params.id],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(new Date().toLocaleString() + ' LOG: Get question ERROR');
+					console.log(now + ' LOG: Get question ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Get question OK');
+				console.log(now + ' LOG: Get question OK');
 				res.send(db_res.rows[0]);
 			}
 		);
@@ -63,13 +63,12 @@ export default (app: Router) => {
 				question.content_cz,
 			],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(
-						new Date().toLocaleString() + ' LOG: Create question ERROR'
-					);
+					console.log(now + ' LOG: Create question ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Create question OK');
+				console.log(now + ' LOG: Create question OK');
 				res.send(db_res.rows[0]);
 			}
 		);
@@ -80,13 +79,12 @@ export default (app: Router) => {
 			`DELETE from questions WHERE id = $1;`,
 			[req.params.id],
 			(err: any, db_res: any) => {
+				const now = new Date().toLocaleString();
 				if (err) {
-					console.log(
-						new Date().toLocaleString() + ' LOG: Delete question ERROR'
-					);
+					console.log(now + ' LOG: Delete question ERROR');
 					return next(err);
 				}
-				console.log(new Date().toLocaleString() + ' LOG: Delete question OK');
+				console.log(now + ' LOG: Delete question OK');
 				res.send(db_res.rows[0]);
 			}
 		);

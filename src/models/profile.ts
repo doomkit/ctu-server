@@ -20,4 +20,5 @@ export class ProfileStats implements Profile {
 	knowledge = 0;
 	resources = 0;
 	specificity = 0;
+	corresponding_type?: CollaborationType;
 }

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { db } from '../../db';
 import { Profile } from '../../models/profile';
+import { makeid } from '../../utils/helpers';
 
 const ResultsRoute = Router();
 export default (app: Router) => {
@@ -45,12 +46,12 @@ export default (app: Router) => {
 				const secondaryId = db_res.rows[1].id;
 				db.query(
 					`	INSERT INTO results
-							(start_date, complete_date, primary_profile_id, secondary_profile_id)
+							(str_id, start_date, complete_date, primary_profile_id, secondary_profile_id)
 						VALUES
-							(to_timestamp($1), to_timestamp($2), $3, $4)
+							($1, to_timestamp($2), to_timestamp($3), $4, $5)
 						RETURNING *;
 			`,
-					[startDate, endDate, primaryId, secondaryId],
+					[makeid(20), startDate, endDate, primaryId, secondaryId],
 					(err: any, db_res2: any) => {
 						if (err) {
 							console.log(

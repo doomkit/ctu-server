@@ -31,28 +31,5 @@ export default (app: Router) => {
 		);
 	});
 
-	QuestionsRoute.post('/', (req, res, next) => {
-		const question = req.body as Question;
-		questionRepository.createQuestion(
-			question,
-			(error) => {
-				console.log(Helpers.now() + ' LOG: Create question ERROR');
-				return next(error);
-			},
-			(result) => res.send(result)
-		);
-	});
-
-	QuestionsRoute.delete('/:id', (req, res, next) => {
-		questionRepository.deleteQuestion(
-			parseInt(req.params.id),
-			(error) => {
-				console.log(Helpers.now() + ' LOG: Delete question ERROR');
-				return next(error);
-			},
-			(result) => res.send(result)
-		);
-	});
-
 	app.use('/questions', QuestionsRoute);
 };

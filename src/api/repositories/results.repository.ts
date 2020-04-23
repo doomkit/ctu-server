@@ -1,7 +1,18 @@
 import * as Helpers from '../../utils/helpers';
+import { Result } from '../../models';
 
 export class ResultsRepository {
 	constructor(private db: any) {}
+
+	getResults(err: (error) => void, result: (result: Result[]) => void): void {
+		this.db.query(`SELECT * FROM results;`, [], (error: any, db_res: any) => {
+			if (error) {
+				err(error);
+				return;
+			}
+			result(db_res.rows);
+		});
+	}
 
 	createResult(
 		startTime: Date,
@@ -31,5 +42,48 @@ export class ResultsRepository {
 		);
 	}
 
-	getTimeSpent() {}
+	deleteResult(
+		id: number,
+		err: (error) => void,
+		result: (result: Result) => void
+	): void {
+		this.db.query(
+			`	DELETE FROM results WHERE id = $1 RETURNING *;`,
+			[id],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				const primaryId = db_res.rows[0].primary_profile_id;
+				const secondaryId = db_res.rows[0].secondary_profile_id;
+				this.db.query(
+					`DELETE FROM profiles WHERE id IN ($1, $2);`,
+					[primaryId, secondaryId],
+					(error_2: any, db_res_2: any) => {
+						if (error_2) {
+							err(error_2);
+							return;
+						}
+						result(db_res.rows[0]);
+					}
+				);
+			}
+		);
+	}
+
+	getDurations(err: (error) => void, result: (result: any) => void): void {
+		this.db.query(
+			`SELECT start_date, complete_date FROM results`,
+			[],
+			(error: any, db_res: any) => {
+				const now = new Date().toLocaleString();
+				if (error) {
+					err(error);
+					return;
+				}
+				result(db_res.rows);
+			}
+		);
+	}
 }

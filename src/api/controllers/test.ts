@@ -38,6 +38,7 @@ export default (app: Router) => {
 						return res.status(500).send({ error: 'Invalid result' });
 					}
 					profileRepository.createProfile(
+						// Persist profiles
 						result.primary_profile,
 						result.secondary_profile,
 						(error) => {
@@ -45,6 +46,7 @@ export default (app: Router) => {
 							return next(error);
 						},
 						(primaryId, secondaryId) => {
+							// Create result with linked profiles
 							resultsRepository.createResult(
 								newState.start_time as Date,
 								newState.end_time as Date,
@@ -55,6 +57,7 @@ export default (app: Router) => {
 									return next(error);
 								},
 								(resultId, stringId) => {
+									// Save user answers
 									newState.result_str_id = stringId;
 									answersRepository.saveAnswers(
 										newState.answers,

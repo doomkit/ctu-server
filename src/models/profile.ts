@@ -2,7 +2,7 @@ import { CollaborationType } from './collaboration';
 
 export interface Profile {
 	id?: number;
-	corresponding_type?: CollaborationType;
+	corresponding_type?: CollaborationType | string;
 	communication: number;
 	experience: number;
 	expectations: number;
@@ -13,6 +13,7 @@ export interface Profile {
 }
 
 export class ProfileStats implements Profile {
+	[x: string]: any;
 	communication = 0;
 	experience = 0;
 	expectations = 0;
@@ -20,5 +21,5 @@ export class ProfileStats implements Profile {
 	knowledge = 0;
 	resources = 0;
 	specificity = 0;
-	corresponding_type?: CollaborationType;
+	corresponding_type?: string;
 }

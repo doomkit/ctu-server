@@ -39,9 +39,8 @@ export default (app: Router) => {
 				console.log(Helpers.now() + ' LOG: Get profiles ERROR');
 				return next(error);
 			},
-			(profiles: ProfileStats[]) => {
-				res.send(statisticsService.calculateAvgProfile(profiles));
-			}
+			(profiles: ProfileStats[]) =>
+				res.send(statisticsService.calculateAvgProfile(profiles))
 		);
 	});
 

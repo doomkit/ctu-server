@@ -13,7 +13,7 @@ export class ProfileRepository {
 		const secondaryProfile = Object.values(secondary);
 		this.db.query(
 			`	INSERT INTO profiles
-					(corresponding_type, communication, experience, expectations, people, knowledge, resources, specificity)
+					(communication, experience, expectations, people, knowledge, resources, specificity, corresponding_type)
 				VALUES
 					($1, $2, $3, $4, $5, $6, $7, $8),
 					($9, $10, $11, $12, $13, $14, $15, $16)
@@ -35,9 +35,9 @@ export class ProfileRepository {
 	getProfilesCount(err: (error) => void, result: (count: any) => void): void {
 		this.db.query(
 			`	SELECT
-				corresponding_type, COUNT(*) AS "count"
-			FROM profiles
-			GROUP BY corresponding_type;
+					corresponding_type, COUNT(*) AS "count"
+				FROM profiles
+				GROUP BY corresponding_type;
 			`,
 			[],
 			(error: any, db_res: any) => {
@@ -72,7 +72,7 @@ export class ProfileRepository {
 					err(error);
 					return;
 				}
-				result(db_res);
+				result(db_res.rows);
 			}
 		);
 	}

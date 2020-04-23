@@ -38,13 +38,15 @@ export class StatisticService {
 			}
 		);
 		const l = profiles.length;
-		profile.communication = Math.round((profile.communication * 10) / l) / 10;
-		profile.experience = Math.round((profile.experience * 10) / l) / 10;
-		profile.expectations = Math.round((profile.expectations * 10) / l) / 10;
-		profile.knowledge = Math.round((profile.knowledge * 10) / l) / 10;
-		profile.people = Math.round((profile.people * 10) / l) / 10;
-		profile.resources = Math.round((profile.resources * 10) / l) / 10;
-		profile.specificity = Math.round((profile.specificity * 10) / l) / 10;
-		return profile;
+		const result: ProfileStats = {
+			communication: Math.round((profile.communication * 10) / l) / 10,
+			experience: Math.round((profile.experience * 10) / l) / 10,
+			expectations: Math.round((profile.expectations * 10) / l) / 10,
+			knowledge: Math.round((profile.knowledge * 10) / l) / 10,
+			people: Math.round((profile.people * 10) / l) / 10,
+			resources: Math.round((profile.resources * 10) / l) / 10,
+			specificity: Math.round((profile.specificity * 10) / l) / 10,
+		};
+		return result;
 	}
 }

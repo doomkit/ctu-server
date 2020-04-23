@@ -48,7 +48,7 @@ export class ProfileRepository {
 				let count = {};
 				if (db_res.rows.length > 0) {
 					db_res.rows.forEach((elem) => {
-						result[elem.corresponding_type] = Number.parseInt(elem.count);
+						count[elem.corresponding_type] = Number.parseInt(elem.count);
 					});
 				}
 				result(count);

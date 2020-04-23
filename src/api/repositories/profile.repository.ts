@@ -31,4 +31,49 @@ export class ProfileRepository {
 			}
 		);
 	}
+
+	getProfilesCount(err: (error) => void, result: (count: any) => void): void {
+		this.db.query(
+			`	SELECT
+				corresponding_type, COUNT(*) AS "count"
+			FROM profiles
+			GROUP BY corresponding_type;
+			`,
+			[],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				let count = {};
+				if (db_res.rows.length > 0) {
+					db_res.rows.forEach((elem) => {
+						result[elem.corresponding_type] = Number.parseInt(elem.count);
+					});
+				}
+				result(count);
+			}
+		);
+	}
+
+	getPrimaryProfiles(
+		err: (error) => void,
+		result: (values: any) => void
+	): void {
+		this.db.query(
+			`	SELECT primary_profile_id, communication, experience, expectations, people, knowledge, resources, specificity
+				FROM results
+				LEFT JOIN profiles
+				ON results.primary_profile_id = profiles.id
+			`,
+			[],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				result(db_res);
+			}
+		);
+	}
 }

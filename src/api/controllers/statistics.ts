@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { db } from '../../db';
+import * as Helpers from '../../utils/helpers';
 import { StatisticService } from '../../services';
+import { ProfileRepository } from '../repositories';
+import { ProfileStats } from 'src/models';
 
 const StatisticsRoute = Router();
 const statisticsService = new StatisticService();
+const profileRepository = new ProfileRepository(db);
 
 export default (app: Router) => {
 	StatisticsRoute.get('/avg-time-spent', (req, res, next) => {
@@ -32,47 +36,24 @@ export default (app: Router) => {
 	});
 
 	StatisticsRoute.get('/avg-profile', (req, res, next) => {
-		db.query(
-			`	SELECT
-					communication, experience, expectations, people, knowledge, resources, specificity
-				FROM profiles`,
-			[],
-			(err: any, db_res: any) => {
-				const now = new Date().toLocaleString();
-				if (err) {
-					console.log(now + ' LOG: Get profiles ERROR');
-					return next(err);
-				}
-				console.log(now + ' LOG: Get profiles OK');
-				let avg_profile = statisticsService.calculateAvgProfile(db_res.rows);
-				res.send(avg_profile);
+		profileRepository.getPrimaryProfiles(
+			(error) => {
+				console.log(Helpers.now() + ' LOG: Get profiles ERROR');
+				return next(error);
+			},
+			(profiles: ProfileStats[]) => {
+				res.send(statisticsService.calculateAvgProfile(profiles));
 			}
 		);
 	});
 
 	StatisticsRoute.get('/type-count', (req, res, next) => {
-		db.query(
-			`	SELECT
-					corresponding_type, COUNT(*) AS "count"
-				FROM profiles
-				GROUP BY corresponding_type;
-			`,
-			[],
-			(err: any, db_res: any) => {
-				const now = new Date().toLocaleString();
-				if (err) {
-					console.log(now + ' LOG: Get profiles ERROR');
-					return next(err);
-				}
-				let result = {};
-				if (db_res.rows.length > 0) {
-					db_res.rows.forEach((elem) => {
-						result[elem.corresponding_type] = Number.parseInt(elem.count);
-					});
-				}
-				console.log(now + ' LOG: Get profiles OK');
-				res.send(result);
-			}
+		profileRepository.getProfilesCount(
+			(error) => {
+				console.log(Helpers.now() + ' LOG: Get profiles count ERROR');
+				return next(error);
+			},
+			(count) => res.send(count)
 		);
 	});
 

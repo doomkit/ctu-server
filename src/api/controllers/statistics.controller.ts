@@ -26,7 +26,7 @@ export default (app: Router) => {
 				console.log(Helpers.now() + ' LOG: Get duration OK');
 				res.send({
 					avg_duration,
-					total: data.rows.length,
+					total: data.length,
 					last_completion,
 				});
 			}

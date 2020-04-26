@@ -2,11 +2,18 @@ import { Router } from 'express';
 import { db } from '../../db';
 
 import * as Helpers from '../../utils/helpers';
-import { ResultsRepository, ProfileRepository } from '../repositories';
-import { Result } from 'src/models';
+import {
+	ResultsRepository,
+	ProfileRepository,
+	CommentsRepository,
+	AnswersRepository,
+} from '../repositories';
+import { Result, Comment } from '../../models';
 
 const resultsRepository = new ResultsRepository(db);
 const profileRepository = new ProfileRepository(db);
+const commentsRepository = new CommentsRepository(db);
+const answersRepository = new AnswersRepository(db);
 
 const ResultsRoute = Router();
 export default (app: Router) => {
@@ -39,8 +46,12 @@ export default (app: Router) => {
 				return next(error);
 			},
 			(result) => {
-				if (!result.primary_profile_id || !result.secondary_profile_id) {
-					return res.status(500).send({ error: 'Result calculation' });
+				if (
+					!result ||
+					!result.primary_profile_id ||
+					!result.secondary_profile_id
+				) {
+					return res.status(404).send({ error: 'Result calculation' });
 				}
 				profileRepository.getResultProfiles(
 					result.primary_profile_id,
@@ -56,8 +67,40 @@ export default (app: Router) => {
 						result.secondary_profile = profiles.find(
 							(profile) => profile.id === result.secondary_profile_id
 						);
-						console.log(result);
-						res.send(result);
+						commentsRepository.getComments(
+							(error) => {
+								console.log(Helpers.now() + ' LOG: Get comments ERROR');
+								return next(error);
+							},
+							(comments) => {
+								answersRepository.getAnswers(
+									(result.id as number).toString(),
+									(error) => {
+										console.log(Helpers.now() + ' LOG: Get answers ERROR');
+										return next(error);
+									},
+									(answers) => {
+										const answers_ids = answers.map((answer) => answer.id);
+										let filtered_comments: Comment[] = [];
+										comments.forEach((comment) => {
+											let condition: number[] = JSON.parse(comment.condition);
+											for (let i = 0; i < condition.length; i++) {
+												let id = condition[i];
+												const presented = answers_ids.find(
+													(answer_id) => answer_id === id
+												);
+												if (presented) {
+													filtered_comments = [...filtered_comments, comment];
+													break;
+												}
+											}
+										});
+										result.comments = filtered_comments;
+										res.send(result);
+									}
+								);
+							}
+						);
 					}
 				);
 			}

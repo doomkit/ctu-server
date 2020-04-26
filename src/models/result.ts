@@ -1,5 +1,4 @@
-import { Profile } from './profile';
-import { Answer } from './answer';
+import { Profile, Answer, Comment } from '.';
 
 export interface Result {
 	id?: number;
@@ -11,6 +10,7 @@ export interface Result {
 	answers: Answer[];
 	primary_profile_id?: number;
 	secondary_profile_id?: number;
+	comments?: Comment[];
 }
 
 export interface ResultAnswer {

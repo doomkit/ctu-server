@@ -68,4 +68,22 @@ export class AnswersRepository {
 			}
 		);
 	}
+
+	getAnswers(
+		id: string,
+		err: (error) => void,
+		result: (answers: Answer[]) => void
+	): void {
+		this.db.query(
+			`SELECT * FROM results_answers WHERE results_answers.result_id = $1;`,
+			[id],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				result(db_res.rows);
+			}
+		);
+	}
 }

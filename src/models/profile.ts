@@ -13,7 +13,6 @@ export interface Profile {
 }
 
 export class ProfileStats implements Profile {
-	[x: string]: any;
 	communication = 0;
 	experience = 0;
 	expectations = 0;

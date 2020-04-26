@@ -76,4 +76,23 @@ export class ProfileRepository {
 			}
 		);
 	}
+
+	getResultProfiles(
+		primary_id: number,
+		secondary_id: number,
+		err: (error) => void,
+		result: (values: any) => void
+	): void {
+		this.db.query(
+			`SELECT * FROM profiles WHERE profiles.id IN ($1, $2)`,
+			[primary_id, secondary_id],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				result(db_res.rows);
+			}
+		);
+	}
 }

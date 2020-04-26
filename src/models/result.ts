@@ -9,6 +9,8 @@ export interface Result {
 	primary_profile: Profile;
 	secondary_profile: Profile;
 	answers: Answer[];
+	primary_profile_id?: number;
+	secondary_profile_id?: number;
 }
 
 export interface ResultAnswer {

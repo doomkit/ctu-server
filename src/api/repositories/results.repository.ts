@@ -14,6 +14,24 @@ export class ResultsRepository {
 		});
 	}
 
+	getResult(
+		str_id: string,
+		err: (error) => void,
+		result: (result: Result) => void
+	): void {
+		this.db.query(
+			`SELECT * FROM results WHERE results.str_id = $1;`,
+			[str_id],
+			(error: any, db_res: any) => {
+				if (error) {
+					err(error);
+					return;
+				}
+				result(db_res.rows[0]);
+			}
+		);
+	}
+
 	createResult(
 		startTime: Date,
 		endTime: Date,

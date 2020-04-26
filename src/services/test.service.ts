@@ -87,20 +87,19 @@ export class TestService {
 		if (!state.type_primary || !state.type_secondary) {
 			return null;
 		}
-		primary_profile.corresponding_type = CollaborationType[state.type_primary];
-		secondary_profile.corresponding_type =
-			CollaborationType[state.type_secondary];
+		primary_profile.corresponding_type = state.type_primary;
+		secondary_profile.corresponding_type = state.type_secondary;
 		for (let i = 0; i < state.answers.length; i++) {
 			const params = state.answers[i].params
 				? JSON.parse(state.answers[i].params)
 				: {};
 			for (let type in params) {
-				if (primary_profile.corresponding_type === CollaborationType[type]) {
+				if (primary_profile.corresponding_type === type) {
 					for (let key in params[type]) {
 						primary_profile[key] = primary_profile[key] + params[type][key];
 					}
 				}
-				if (secondary_profile.corresponding_type === CollaborationType[type]) {
+				if (secondary_profile.corresponding_type === type) {
 					for (let key in params[type]) {
 						secondary_profile[key] = secondary_profile[key] + params[type][key];
 					}

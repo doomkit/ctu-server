@@ -164,58 +164,63 @@ export class TestService {
 				case 7: {
 					switch (answer.letter) {
 						case 'a': {
+							profile.management++;
 							profile['research projects']++;
 							profile['employee mobility']++;
-							profile.management--;
+							profile['student mobility']--;
 							profile['short-term cooperation']--;
 							break;
 						}
 						case 'b': {
 							profile.education++;
+							profile.management = profile.management + 2;
 							profile['research projects']++;
-							profile['employee mobility']++;
-							profile['student mobility']++;
+							profile['employee mobility'] = profile['employee mobility'] + 2;
+							profile['student mobility']--;
 							profile['short-term cooperation']--;
 							break;
 						}
 						case 'c': {
-							profile['student mobility']++;
-							profile['short-term cooperation']++;
-							profile.education--;
+							profile.education = profile.education - 2;
 							profile['research projects']--;
 							profile['commercial projects']--;
 							profile['employee mobility']--;
-							profile['student mobility']--;
+							profile['student mobility'] = profile['student mobility'] + 2;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 5;
 							break;
 						}
 						case 'd': {
-							profile['research projects']++;
-							profile['commercial projects']++;
+							profile['research projects'] = profile['research projects'] + 5;
+							profile['commercial projects'] =
+								profile['commercial projects'] + 6;
 							profile['employee mobility']++;
-							profile['student mobility']--;
-							profile['short-term cooperation']--;
+							profile['student mobility'] = profile['student mobility'] - 2;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] - 2;
 							break;
 						}
 						case 'e': {
-							profile['employee mobility']++;
-							profile['short-term cooperation']++;
-							profile.education--;
-							profile['commercial projects']--;
-							profile['student mobility']--;
+							profile.education = profile.education - 2;
+							profile.management = profile.management + 3;
+							profile['employee mobility'] = profile['employee mobility'] + 3;
+							profile['student mobility'] = profile['student mobility'] - 2;
 							break;
 						}
 						case 'f': {
-							profile['student mobility']++;
-							profile['short-term cooperation']++;
-							profile['research projects']--;
-							profile['employee mobility']--;
+							profile['research projects'] = profile['research projects'] - 2;
+							profile['employee mobility'] = profile['employee mobility'] - 2;
+							profile['student mobility'] = profile['student mobility'] + 5;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 5;
 							break;
 						}
 						case 'g': {
-							profile.education++;
-							profile.management++;
+							profile.education = profile.education + 3;
+							profile.management = profile.management + 2;
+							profile['research projects']--;
+							profile['commercial projects']--;
 							profile['employee mobility']--;
-							profile['student mobility']--;
 							break;
 						}
 					}
@@ -224,20 +229,8 @@ export class TestService {
 				case 12: {
 					switch (answer.letter) {
 						case 'a': {
-							profile.education++;
-							profile.management++;
-							profile['research projects']++;
-							profile['commercial projects']++;
-							break;
-						}
-						case 'b': {
-							profile.education++;
-							profile.management++;
-							profile['research projects']++;
-							profile['commercial projects']++;
-							profile['employee mobility']++;
-							profile['student mobility']++;
-							profile['short-term cooperation']++;
+							profile.management = profile.management + 5;
+							profile['research projects'] = profile['research projects'] + 2;
 							break;
 						}
 						case 'c': {
@@ -247,9 +240,9 @@ export class TestService {
 							break;
 						}
 						case 'd': {
-							profile.education--;
+							profile.education = profile.education + 2;
 							profile.management--;
-							profile['research projects']--;
+							profile['research projects'] = profile['research projects'] + 2;
 							profile['commercial projects']--;
 							profile['employee mobility']--;
 							profile['student mobility']--;
@@ -263,26 +256,17 @@ export class TestService {
 						case 'a': {
 							profile.education++;
 							profile.management++;
-							profile['employee mobility']++;
-							profile['student mobility']++;
 							profile['short-term cooperation']++;
-							profile['commercial projects']--;
 							break;
 						}
 						case 'b': {
 							profile.education++;
-							profile['research projects']++;
-							profile['student mobility']--;
-							profile['short-term cooperation']--;
 							break;
 						}
 						case 'c': {
 							profile.education--;
 							profile.management--;
-							profile['research projects']++;
-							profile['commercial projects']++;
 							profile['employee mobility']--;
-							profile['student mobility']--;
 							profile['short-term cooperation']--;
 							break;
 						}
@@ -292,24 +276,23 @@ export class TestService {
 				case 15: {
 					switch (answer.letter) {
 						case 'a': {
-							profile.education++;
-							profile.management++;
+							profile.education = profile.education + 2;
 							profile['research projects']++;
-							profile['commercial projects']++;
-							profile['student mobility']--;
-							profile['short-term cooperation']++;
 							break;
 						}
 						case 'b': {
-							profile.education--;
-							profile['research projects']--;
+							profile.education = profile.education - 2;
+							profile['research projects'] = profile['research projects'] - 2;
+							profile['student mobility']--;
 							profile['short-term cooperation']--;
 							break;
 						}
 						case 'c': {
-							profile['research projects']++;
-							profile['employee mobility']++;
-							profile.education--;
+							profile.education = profile.education - 2;
+							profile.management++;
+							profile['research projects']--;
+							profile['commercial projects']++;
+							profile['employee mobility'] = profile['employee mobility'] + 2;
 							profile['short-term cooperation']--;
 							break;
 						}
@@ -319,36 +302,33 @@ export class TestService {
 				case 16: {
 					switch (answer.letter) {
 						case 'a': {
-							profile.education++;
+							profile.education = profile.education + 3;
 							profile.management++;
-							profile['commercial projects']--;
-							profile['student mobility']--;
-							profile['short-term cooperation']--;
+							profile['research projects']--;
+							profile['employee mobility']++;
+							profile['student mobility'] = profile['student mobility'] - 2;
 							break;
 						}
 						case 'b': {
-							profile.management++;
-							profile['research projects']++;
-							profile['commercial projects']++;
-							profile['employee mobility']++;
 							profile.education--;
-							profile['student mobility']--;
+							profile.management++;
+							profile['research projects'] = profile['research projects'] + 3;
+							profile['employee mobility']++;
+							profile['student mobility'] = profile['student mobility'] - 2;
 							break;
 						}
 						case 'c': {
-							profile['student mobility']++;
-							profile['short-term cooperation']++;
 							profile.management--;
-							profile['commercial projects']--;
-							profile['employee mobility']--;
+							profile['research projects']--;
+							profile['employee mobility'] = profile['employee mobility'] - 2;
+							profile['student mobility'] = profile['student mobility'] + 3;
 							break;
 						}
 						case 'd': {
-							profile['short-term cooperation']++;
 							profile.management--;
-							profile['commercial projects']--;
+							profile['research projects'] = profile['research projects'] - 2;
+							profile['employee mobility'] = profile['employee mobility'] - 2;
 							profile['student mobility']--;
-							profile['employee mobility']--;
 							break;
 						}
 					}
@@ -357,38 +337,35 @@ export class TestService {
 				case 17: {
 					switch (answer.letter) {
 						case 'a': {
-							profile.education++;
-							profile['research projects']++;
-							profile['commercial projects']++;
+							profile.education = profile.education + 3;
 							profile['employee mobility']++;
 							profile['short-term cooperation']++;
-							profile['student mobility']--;
 							break;
 						}
 						case 'b': {
-							profile['research projects']++;
-							profile['commercial projects']++;
+							profile.education = profile.education - 2;
+							profile['student mobility'] = profile['student mobility'] + 2;
 							profile['short-term cooperation']--;
 							break;
 						}
 						case 'c': {
-							profile.education++;
+							profile.education = profile.education + 3;
 							profile.management++;
 							profile['research projects']++;
 							profile['commercial projects']++;
 							profile['employee mobility']++;
 							profile['student mobility']++;
-							profile['short-term cooperation']++;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 2;
 							break;
 						}
 						case 'd': {
-							profile.education++;
-							profile.management++;
-							profile['employee mobility']++;
-							profile['student mobility']++;
-							profile['short-term cooperation']++;
-							profile['research projects']--;
-							profile['commercial projects']--;
+							profile.education = profile.education - 2;
+							profile.management = profile.management - 2;
+							profile['employee mobility'] = profile['employee mobility'] - 2;
+							profile['student mobility'] = profile['student mobility'] - 2;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] - 2;
 							break;
 						}
 					}
@@ -397,8 +374,9 @@ export class TestService {
 				case 18: {
 					switch (answer.letter) {
 						case 'a': {
-							profile.education++;
-							profile['research projects']++;
+							profile.education = profile.education + 3;
+							profile.management++;
+							profile['research projects'] = profile['research projects'] + 2;
 							profile['commercial projects']++;
 							profile['employee mobility']++;
 							profile['student mobility']++;
@@ -406,18 +384,19 @@ export class TestService {
 							break;
 						}
 						case 'b': {
-							profile.management++;
-							profile.education--;
-							profile['commercial projects']--;
+							profile.education = profile.education - 2;
+							profile['research projects']--;
 							profile['employee mobility']--;
+							profile['student mobility']--;
+							profile['short-term cooperation']--;
 							break;
 						}
 						case 'c': {
 							profile.management++;
-							profile['research projects']++;
+							profile['commercial projects']++;
 							profile['employee mobility']++;
-							profile['short-term cooperation']++;
-							profile.education--;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 2;
 							break;
 						}
 					}
@@ -426,39 +405,54 @@ export class TestService {
 				case 19: {
 					switch (answer.letter) {
 						case 'a': {
-							profile['short-term cooperation']++;
-							profile.education--;
-							profile.management--;
-							profile['research projects']--;
-							profile['commercial projects']--;
+							profile.education = profile.education - 5;
+							profile.management = profile.management - 2;
+							profile['research projects'] = profile['research projects'] - 3;
+							profile['commercial projects'] =
+								profile['commercial projects'] - 3;
 							profile['employee mobility']--;
 							profile['student mobility']--;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 3;
 							break;
 						}
 						case 'b': {
-							profile['short-term cooperation']++;
-							profile['research projects']++;
-							profile['commercial projects']++;
-							profile['employee mobility']++;
-							profile['student mobility']++;
-							profile.education--;
-							profile.management--;
+							profile.education = profile.education - 4;
+							profile.management = profile.management - 2;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] + 2;
 							break;
 						}
 						case 'c': {
+							profile.education = profile.education - 2;
 							profile.management++;
 							profile['research projects']++;
 							profile['commercial projects']++;
-							profile.education--;
+							profile['employee mobility'] = profile['employee mobility'] + 2;
+							profile['student mobility'] = profile['student mobility'] + 2;
 							profile['short-term cooperation']--;
 							break;
 						}
 						case 'd': {
-							profile.education++, profile.management++;
-							profile['research projects']++;
-							profile['employee mobility']--;
-							profile['student mobility']--;
-							profile['short-term cooperation']--;
+							profile.education = profile.education + 2;
+							profile.management = profile.management + 2;
+							profile['research projects'] = profile['research projects'] + 2;
+							profile['commercial projects'] =
+								profile['commercial projects'] + 2;
+							profile['employee mobility']++;
+							profile['student mobility']++;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] - 4;
+							break;
+						}
+						case 'e': {
+							profile.education = profile.education + 3;
+							profile.management = profile.management + 3;
+							profile['research projects'] = profile['research projects'] + 2;
+							profile['commercial projects'] =
+								profile['commercial projects'] + 2;
+							profile['short-term cooperation'] =
+								profile['short-term cooperation'] - 5;
 							break;
 						}
 					}

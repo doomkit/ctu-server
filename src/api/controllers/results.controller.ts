@@ -89,7 +89,10 @@ export default (app: Router) => {
 												const presented = answers_ids.find(
 													(answer_id) => answer_id === id
 												);
-												if (presented) {
+												const typeMatch =
+													result.primary_profile.corresponding_type === id ||
+													result.secondary_profile.corresponding_type === id;
+												if (presented || typeMatch) {
 													filtered_comments = [...filtered_comments, comment];
 													break;
 												}

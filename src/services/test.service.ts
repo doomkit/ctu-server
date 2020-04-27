@@ -496,7 +496,7 @@ export class TestService {
 			}
 			case 30: {
 				const a = answers.find((a: Answer) => (a.question_id = 29));
-				return !!a && a.letter !== 'a' && a.letter !== 'b';
+				return !!a && a.letter === 'c';
 			}
 			case 33:
 			case 34: {

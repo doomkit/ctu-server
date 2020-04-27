@@ -80,7 +80,9 @@ export default (app: Router) => {
 										return next(error);
 									},
 									(answers) => {
-										const answers_ids = answers.map((answer) => answer.id);
+										const answers_ids = answers.map(
+											(answer) => answer.answer_id
+										);
 										let filtered_comments: Comment[] = [];
 										comments.forEach((comment) => {
 											let conditions: (number | string)[] = JSON.parse(
@@ -103,7 +105,6 @@ export default (app: Router) => {
 											}
 										});
 										result.comments = filtered_comments;
-										result.answers = answers;
 										res.send(result);
 									}
 								);

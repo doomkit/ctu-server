@@ -103,6 +103,7 @@ export default (app: Router) => {
 											}
 										});
 										result.comments = filtered_comments;
+										result.answers = answers;
 										res.send(result);
 									}
 								);

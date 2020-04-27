@@ -83,15 +83,19 @@ export default (app: Router) => {
 										const answers_ids = answers.map((answer) => answer.id);
 										let filtered_comments: Comment[] = [];
 										comments.forEach((comment) => {
-											let condition: number[] = JSON.parse(comment.condition);
-											for (let i = 0; i < condition.length; i++) {
-												let id = condition[i];
+											let conditions: (number | string)[] = JSON.parse(
+												comment.condition
+											);
+											for (let i = 0; i < conditions.length; i++) {
+												let condition = conditions[i];
 												const presented = answers_ids.find(
-													(answer_id) => answer_id === id
+													(answer_id) => answer_id === condition
 												);
 												const typeMatch =
-													result.primary_profile.corresponding_type === id ||
-													result.secondary_profile.corresponding_type === id;
+													result.primary_profile.corresponding_type ===
+														condition ||
+													result.secondary_profile.corresponding_type ===
+														condition;
 												if (presented || typeMatch) {
 													filtered_comments = [...filtered_comments, comment];
 													break;

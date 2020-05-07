@@ -44,6 +44,16 @@ export default (app: Router) => {
 		);
 	});
 
+	StatisticsRoute.get('/profiles', (req, res, next) => {
+		profileRepository.getPrimaryProfiles(
+			(error) => {
+				console.log(Helpers.now() + ' LOG: Get profiles ERROR');
+				return next(error);
+			},
+			(profiles: ProfileStats[]) => res.send(profiles)
+		);
+	});
+
 	StatisticsRoute.get('/type-count', (req, res, next) => {
 		profileRepository.getProfilesCount(
 			(error) => {
